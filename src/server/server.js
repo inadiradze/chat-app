@@ -20,13 +20,16 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
 	console.log(`${socket.id} has connected`);
 
-	socket.on("join-camp", (data) => {
+	socket.on("join-camp", (data, name) => {
 		if(socket.oldCamp){
 			socket.leave(socket.oldCamp);
 			socket.oldCamp = null;
+		}else{
+			console.log(name);
+			console.log(data);
+			socket.join(data);
+			socket.oldCamp = data;
 		}
-		socket.join(data);
-		socket.oldCamp = data;
 	});
 
 	socket.on("send_message", (data) => {

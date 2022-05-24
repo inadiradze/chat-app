@@ -15,7 +15,7 @@ function App() {
 
   function joinCamp(){
     if(camp !== "" && name!== "") {
-      socket.emit("join-camp", camp);
+      socket.emit("join-camp", camp, name);
     }
   };
 
