@@ -18,19 +18,17 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
 	console.log(`${socket.id} has connected`);
 
-	socket.on("send-msg", (data) => {
-
-		socket.broadcast.emit("recieve-msg", data)
-			console.log(`${socket.id} sent message: ${data.message}`);
-	});
-
-	socket.on("join-camp", (data) => {socket.join(data)
-			console.log(`${socket.id} has joined the camp: ${data}`);
+	socket.on("join-camp", (data) => {
+		if(socket.oldCamp){
+			socket.leave(socket.oldCamp);
+			socket.oldCamp = null;
+		}
+		socket.join(data);
+		socket.oldCamp = data;
 	});
 
 	socket.on("sendMsg-camp", (data) => {
 		socket.to(data.camp).emit("recieve-msg", data)
-		console.log(`${socket.id} sent message: ${data.message}`);
 	});
 });
 
