@@ -16,6 +16,8 @@ const io = new Server(server, {
  	 },
 });
 
+const users = [];
+
 
 io.on("connection", (socket) => {
 	console.log(`${socket.id} has connected`);
@@ -24,12 +26,12 @@ io.on("connection", (socket) => {
 		if(socket.oldCamp){
 			socket.leave(socket.oldCamp);
 			socket.oldCamp = null;
-		}else{
-			console.log(name);
-			console.log(data);
-			socket.join(data);
-			socket.oldCamp = data;
 		}
+		socket.join(data);
+		socket.oldCamp = data;
+		users.push({camp: data,
+					user: name});
+		console.log(users);
 	});
 
 	socket.on("send_message", (data) => {

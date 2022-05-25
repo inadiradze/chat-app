@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./style.css";
 
 function Chat({socket, name, camp}) {
 
+
 	const [msgList, setMessageList] = useState([]);
 	const [msg, setMsg] = useState("");
-	const [received, setReceived] = useState(0);
 
 	async function sendMsg(){
+	    	
 	    if(msg !== ""){
 
 	      let dateTime = new Date();
@@ -32,7 +33,9 @@ function Chat({socket, name, camp}) {
 	return( 
 
 		<div className="chat-window">
-		<input onKeyPress={ (e) => {e.key === 'Enter' && sendMsg()}} value={msg} onChange={ (e) => {setMsg(e.target.value)}}type="text" placeholder="Say something..." />
+			<h1> Chat </h1>
+			<input onKeyPress={ (e) => {e.key === 'Enter' && sendMsg()}} value={msg} onChange={ (e) => {setMsg(e.target.value)}}type="text" placeholder="Say something..." />
+
 	       {msgList.map((chatlist, index) => {
 	          return (
 	          <div key={index} id={name === chatlist.name ? "you" : "other"}>
