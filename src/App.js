@@ -3,6 +3,7 @@ import FullChat from "./FullChat";
 import { Context } from "./Context";
 import Chat from "./Chat";
 import Header from "./Header";
+import Home from "./Home";
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
       <div className="app blur">
         <Header />
       <main>
-        <FullChat />
+        <Home />
       </main>
       </div>
     </div>

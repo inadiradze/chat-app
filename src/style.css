@@ -85,11 +85,21 @@ header .camp-h{
   margin-top: 30px;
 }
 
+.camp-h:hover {
+  transform: scale(1.2);
+  margin-left: 40px;
+  color: #ccc;
+}
+
+.icon-menu:hover {
+  transform: scale(1.1);
+}
+
 
 .camp-div, .chat-div {
   display: flex;
   flex-direction: column;
-  display: ;
+  display: flex;
   text-align: center;
   font-size: 24px;
   position: absolute;
