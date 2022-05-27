@@ -56,7 +56,7 @@ main {
   background-image: url('./assets/camp4.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 
 header{
@@ -194,6 +194,7 @@ header .camp-h{
 }
 
 #timeid {
+  font-style: italic;
   margin-left: 10px;
   color: white;
 }
@@ -238,6 +239,34 @@ header .camp-h{
   color: white;
 }
 
+.chat-messages .chat-msg {
+  overflow-x: hidden;
+  font-size: 17px;
+}
+
+.chat-msg .full-msg {
+  margin-top: 0px;
+}
+
+
+.full-msg #message{
+  display: flex;
+  margin-top: 10px;
+}
+#other{
+  margin-left: 2px;
+  justify-content: flex-start;
+} 
+
+#you {
+  margin-right: 30px;
+  justify-content: flex-end;
+}
+
+.chat-msg {
+  display: flex;
+}
+
 
 
 @media(min-width: 640px){
@@ -276,8 +305,14 @@ header .camp-h{
     font-size: 17px;
   }
 
-  .chat-messages .full-msg {
+  .chat-msg .full-msg {
     margin-top: 0px;
+  }
+
+
+  .full-msg #message{
+    display: flex;
+    margin-top: 10px;
   }
 
   #other{

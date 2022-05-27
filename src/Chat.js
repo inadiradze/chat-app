@@ -47,7 +47,7 @@ function Chat({socket, name, camp}) {
 				{msgList.map((content, index) => {
             		return (
 					<div id={name === content.user ? "you" : "other"}  key={index}className="chat-msg">
-						<p className="full-msg"><span id="author">{content.user}</span> <span id="timeid">{content.time}</span> <br></br> <span id="message">{content.message}</span></p>
+						<p className="full-msg"><span id="author">{content.user}</span> <span id="timeid">{content.time}</span><span id="message">{content.message}</span></p>
 						
 					</div>
 					)})}
