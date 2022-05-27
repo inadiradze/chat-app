@@ -20,6 +20,10 @@ function FullChat(){
       setCampSet(camp); setNameSet(name);
       setCamp(""); setName("");
       setShowChat(true);
+      socket.on("user-taken", ()=> {
+        setShowChat(false);
+        console.log("Username taken");
+      });
     }
   };
 

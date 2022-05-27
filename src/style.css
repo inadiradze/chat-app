@@ -1,16 +1,31 @@
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f4f4f4;
+  background: white;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: black;
+}
+
+div::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: white
+}
+textarea::-webkit-scrollbar-track {
+  background: #181818;
+  }
+
+div::-webkit-scrollbar-track {
+  background: none;
 }
 
 /* Handle on hover */
@@ -108,45 +123,55 @@ header .camp-h{
 }
 
 .chat-div {
-  margin-top: 200px;
-  height: 50%;
+  margin-top: 170px;
+  height: 60%;
   width: 90%;
   max-width: 90%;
-  max-height: 50%;
+  max-height: 60%;
+}
+
+.camp-name {
+  position: absolute;
+  left: 50%;
+  color: #ccc;
+  transform: translateX(-50%);
 }
 
 .chat-messages{
   overflow: hidden;
   overflow-x: hidden;
-  height: 35vh;
-  max-height: 35vh;
+  height: 40vh;
+  max-height: 40vh;
   position: relative;
   width: 60vw;
   max-width: 60vw;
   left: 50%;
   padding-right: 15vw;
-  margin-top: 3vh;
+  margin-top: 9vh;
   transform: translateX(-50%);
   text-align: left;
   word-wrap: break-word;
 }
 
 .msg-container {
-  height: 35vh;
-  max-height: 35vh;
+  height: 40vh;
+  max-height: 40vh;
   position: relative;
   width: 75vw;
   max-width: 75vw;
-
- 
 }
 
 .msg-container::-webkit-scrollbar{
   display: none;
-  margin-left: 10px;
 }
 
+.msg-container::-webkit-scrollbar-track{
+  background: #191919;
+}
+
+
 .chat-msg {
+  margin-top: 20px;
   font-size: 19px;
 }
 
@@ -175,7 +200,7 @@ header .camp-h{
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 44vh;
+  margin-top: 54vh;
 }
 
 .chat-input textarea {

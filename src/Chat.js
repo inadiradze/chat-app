@@ -11,20 +11,20 @@ function Chat({socket, name, camp}) {
 
 	async function sendMsg(evt){
 	    	
-	    if(msg !== "" && evt.key === 'Enter' && !evt.shiftKey){
+	    if(evt.key == 'Enter'){
 	      evt.preventDefault();
-	      console.log(name);
-	      console.log(msg);
-	      let dateTime = new Date();
-	      var minutes = ("0" + dateTime.getMinutes()).substr(-2);
+		      if(msg != ""){
+		      let dateTime = new Date();
+		      var minutes = ("0" + dateTime.getMinutes()).substr(-2);
 
-	      const msgData = {user: name, message: msg, camp: camp, time: dateTime.getHours() + ":" + minutes
-	         }
+		      const msgData = {user: name, message: msg, camp: camp, time: dateTime.getHours() + ":" + minutes
+		         }
 
-	      await socket.emit("send_message", msgData);
-	       setMessageList((list) => [...list, msgData]);
-	      setMsg("");
-    }
+		      await socket.emit("send_message", msgData);
+		       setMessageList((list) => [...list, msgData]);
+		      setMsg("");
+	    }
+	}
   };
 
 	useEffect(() => {
@@ -37,8 +37,9 @@ function Chat({socket, name, camp}) {
 	return( 
 		<div className="chat-div">
 			<div className="chat-window">
+			<p className="camp-name">{camp}</p>
 				<div className="chat-input">
-					<textarea className="chat-textinput" placeholder="Say something..." value={msg} onChange={e => setMsg(e.target.value)} onKeyPress={sendMsg}> 
+					<textarea className="chat-textinput" placeholder='Say something...' value={msg} onChange={e => setMsg(e.target.value)} onKeyPress={sendMsg}> 
 				  	</textarea>
 				</div>
 				<div className="chat-messages">
