@@ -16,7 +16,7 @@ const io = new Server(server, {
  	 },
 });
 
-const users = [];
+let users = [];
 
 
 io.on("connection", (socket) => {
@@ -31,8 +31,7 @@ io.on("connection", (socket) => {
 		if(!found){
 			socket.join(data);
 			socket.oldCamp = data;
-			users.push({camp: data,
-						user: user});
+			users.push({id: socket.id,camp: data, user: user});
 			console.log(users);
 		}else{
 			console.log("TAKEN");
@@ -43,10 +42,12 @@ io.on("connection", (socket) => {
 	socket.on("send_message", (data) => {
 		socket.to(data.camp).emit("receive_message", data);
 		console.log(data.message);
+
 	});
 
 	socket.on("disconnect", () => {
     	console.log("User Disconnected", socket.id);
+
  	 });
 });
 

@@ -12,18 +12,23 @@ function FullChat(){
   const [nameSet, setNameSet] = useState("");
   const [name, setName] = useState("");
   const [showChat, setShowChat] = useState (false);
+  const [error, setError] = useState("");
+
+  function checkName(){
+    socket.on("user-taken", ()=> {
+        setShowChat(false);
+        setError("Name is taken...");
+      });
+  }
  
 
   function joinCamp(evt){
     if(evt.key === 'Enter' && camp !== "" && name!== "") {
+      checkName();
       socket.emit("join-camp", camp, name);
       setCampSet(camp); setNameSet(name);
       setCamp(""); setName("");
       setShowChat(true);
-      socket.on("user-taken", ()=> {
-        setShowChat(false);
-        console.log("Username taken");
-      });
     }
   };
 
@@ -39,6 +44,10 @@ function FullChat(){
             <br></br>
             <p className="cselector-h">Join the camp</p>
             <input onKeyPress={joinCamp} onChange={ e => setCamp(e.target.value)} value={camp} className="camp-selector" type="text"></input>
+            {error != "" && (
+            <div className="error-div">
+              <p> {error} </p>
+            </div>)}
           </div>
         </div>)}
       </div>
