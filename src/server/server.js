@@ -22,7 +22,7 @@ const users = [];
 io.on("connection", (socket) => {
 	console.log(`${socket.id} has connected`);
 
-	socket.on("join-camp", (data, name) => {
+	socket.on("join-camp", (data, user) => {
 		// const found = users.some(el => el.user === name && el.camp === data);
 		if(socket.oldCamp){
 			socket.leave(socket.oldCamp);
@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
 			socket.join(data);
 			socket.oldCamp = data;
 			users.push({camp: data,
-						user: name});
+						user: user});
 			console.log(users);
 	});
 

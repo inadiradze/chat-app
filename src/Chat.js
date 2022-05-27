@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
 import "./style.css";
 import { Context } from "./Context";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 function Chat({socket, name, camp}) {
 
@@ -12,11 +13,12 @@ function Chat({socket, name, camp}) {
 	    	
 	    if(msg !== "" && evt.key === 'Enter' && !evt.shiftKey){
 	      evt.preventDefault();
+	      console.log(name);
 	      console.log(msg);
 	      let dateTime = new Date();
 	      var minutes = ("0" + dateTime.getMinutes()).substr(-2);
 
-	      const msgData = {name: name, message: msg, camp: camp, time: dateTime.getHours() + ":" + minutes
+	      const msgData = {user: name, message: msg, camp: camp, time: dateTime.getHours() + ":" + minutes
 	         }
 
 	      await socket.emit("send_message", msgData);
@@ -40,13 +42,15 @@ function Chat({socket, name, camp}) {
 				  	</textarea>
 				</div>
 				<div className="chat-messages">
+				<ScrollToBottom className="msg-container">
 				{msgList.map((content, index) => {
             		return (
-					<div id={name === content.name ? "you" : "other"}  key={index}className="chat-msg">
-						<p id="author"> {content.name} <span id="timeid">{content.time}</span></p>
+					<div id={name === content.user ? "you" : "other"}  key={index}className="chat-msg">
+						<p id="author">{content.user} <span id="timeid">{content.time}</span></p>
 						<p id="message">{content.message}</p>
 					</div>
 					)})}
+					</ScrollToBottom>
 				</div>
 			</div>
 		</div>

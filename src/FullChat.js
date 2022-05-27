@@ -17,8 +17,7 @@ function FullChat(){
   function joinCamp(evt){
     if(evt.key === 'Enter' && camp !== "" && name!== "") {
       socket.emit("join-camp", camp, name);
-      setNameSet(name);
-      setCampSet(camp);
+      setCampSet(camp); setNameSet(name);
       setCamp(""); setName("");
       setShowChat(true);
     }
@@ -26,12 +25,12 @@ function FullChat(){
 
     return(
       <div>
-        {showChat ? ( <Chat socket={socket} name={name} camp={camp} />) : (
+        {showChat ? ( <Chat socket={socket} name={nameSet} camp={campSet} />) : (
 
         <div className="camp-selector">
           <div className="camp-div">
             <p className="nselector-h">What is your name?</p> 
-            <br></br>
+
             <input onChange={ e => setName(e.target.value)} value={name}className="name-selector" type="text"></input>
             <br></br>
             <p className="cselector-h">Join the camp</p>

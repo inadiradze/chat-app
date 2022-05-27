@@ -74,10 +74,11 @@ header .camp-h{
 .camp-div, .chat-div {
   display: flex;
   flex-direction: column;
+  display: ;
   text-align: center;
   font-size: 24px;
   position: absolute;
-  margin-top: 220px;
+  margin-top: 230px;
   padding: 10px 0px 40px 0px;
   align-items: center;
   backdrop-filter: blur(5px);
@@ -98,6 +99,7 @@ header .camp-h{
   background-color: white;
   padding: 15px;
   transition: 0.4s ease;
+  height: 1px;
 
 }
 
@@ -113,8 +115,9 @@ header .camp-h{
   max-height: 50%;
 }
 
-.chat-messages {
-  overflow-y: auto;
+.chat-messages{
+  overflow: hidden;
+  overflow-x: hidden;
   height: 35vh;
   max-height: 35vh;
   position: relative;
@@ -126,7 +129,21 @@ header .camp-h{
   transform: translateX(-50%);
   text-align: left;
   word-wrap: break-word;
-  
+}
+
+.msg-container {
+  height: 35vh;
+  max-height: 35vh;
+  position: relative;
+  width: 75vw;
+  max-width: 75vw;
+
+ 
+}
+
+.msg-container::-webkit-scrollbar{
+  display: none;
+  margin-left: 10px;
 }
 
 .chat-msg {
@@ -145,7 +162,12 @@ header .camp-h{
 }
 
 .chat-msg #author {
-  margin-top: 30px;
+  margin-top: 10px;
+}
+
+.chat-msg p {
+  max-width: 29vh;
+  word-wrap: break-word;
 }
 
 
@@ -172,6 +194,7 @@ header .camp-h{
 .chat-input textarea::placeholder {
   color: white;
 }
+
 
 
 @media(min-width: 640px){
