@@ -106,9 +106,30 @@ header .camp-h{
 }
 
 .chat-div {
-  min-height: 50%;
+  margin-top: 200px;
+  height: 50%;
+  max-height: 50%;
 }
 
+.chat-input {
+  margin-top: 44vh;
+}
+
+.chat-input textarea {
+  margin-left: 25px;
+  border: none;
+  background: rgba(0, 0, 0, 0.0);
+  color: white;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s ease;
+  padding: 30px;
+  resize: none;
+}
+
+.chat-input textarea::placeholder {
+  color: white;
+}
 
 
 @media(min-width: 640px){

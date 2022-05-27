@@ -35,7 +35,7 @@ function Chat({socket, name, camp}) {
 		<div className="chat-div">
 			<div className="chat-window">
 				<div className="chat-input">
-				<input className="chat-textinput" type="text" placeholder="Say something..." />
+				<textarea className="chat-textinput" placeholder="Say something..." value={msg} onChange={e => setMsg(e.target.value)}> </textarea>
 				</div>
 			</div>
 		</div>
