@@ -71,13 +71,13 @@ header .camp-h{
 }
 
 
-.camp-div {
+.camp-div, .chat-div {
   display: flex;
   flex-direction: column;
   text-align: center;
   font-size: 25px;
   position: absolute;
-  margin-top: 240px;
+  margin-top: 220px;
   padding: 10px 0px 40px 0px;
   align-items: center;
   backdrop-filter: blur(5px);
@@ -103,7 +103,10 @@ header .camp-h{
 
 .camp-div input:focus {
   color: black;
+}
 
+.chat-div {
+  min-height: 50%;
 }
 
 

@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useContext, useRef, useState } from "react";
 import "./style.css";
+import { Context } from "./Context";
 
 function Chat({socket, name, camp}) {
 
@@ -23,25 +24,21 @@ function Chat({socket, name, camp}) {
     }
   };
 
-	useEffect(() => {
-    	socket.on("receive_message", (data) => {
-      		setMessageList((list) => [...list, data]);
-    });
-    	return () => socket.off('receive_message');
-  }, []);
+	// useEffect(() => {
+ //    	socket.on("receive_message", (data) => {
+ //      		setMessageList((list) => [...list, data]);
+ //    });
+ //    	return () => socket.off('receive_message');
+ //  }, []);
 
 	return( 
-
-		<div className="chat-window">
-			<h1> Chat </h1>
-			<input onKeyPress={ (e) => {e.key === 'Enter' && sendMsg()}} value={msg} onChange={ (e) => {setMsg(e.target.value)}}type="text" placeholder="Say something..." />
-
-	       {msgList.map((chatlist, index) => {
-	          return (
-	          <div key={index} id={name === chatlist.name ? "you" : "other"}>
-	           <p>[{chatlist.time}] {chatlist.name}: {chatlist.message} </p>
-	          </div>)})}
-	     </div>)
-}
+		<div className="chat-div">
+			<div className="chat-window">
+				<div className="chat-input">
+				<input className="chat-textinput" type="text" placeholder="Say something..." />
+				</div>
+			</div>
+		</div>
+)}
 
 export default Chat;
