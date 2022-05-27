@@ -38,6 +38,7 @@ io.on("connection", (socket) => {
 
 	socket.on("send_message", (data) => {
 		socket.to(data.camp).emit("receive_message", data);
+		console.log(data.message);
 	});
 
 	socket.on("disconnect", () => {

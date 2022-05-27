@@ -6,16 +6,12 @@ import Header from "./Header";
 
 function App() {
 
-  const [showChat, setShowChat] = useState(false);
-
   return (
     <div className="bg-app">
       <div className="app blur">
-      <Header />
+        <Header />
       <main>
-      <Context.Provider value={{showChat, setShowChat}}>
-      <Chat />
-      </Context.Provider>
+        <FullChat />
       </main>
       </div>
     </div>

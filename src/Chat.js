@@ -19,18 +19,18 @@ function Chat({socket, name, camp}) {
 	      const msgData = {name: name, message: msg, camp: camp, time: dateTime.getHours() + ":" + minutes
 	         }
 
-	      // await socket.emit("send_message", msgData);
+	      await socket.emit("send_message", msgData);
 	       setMessageList((list) => [...list, msgData]);
 	      setMsg("");
     }
   };
 
-	// useEffect(() => {
- //    	socket.on("receive_message", (data) => {
- //      		setMessageList((list) => [...list, data]);
- //    });
- //    	return () => socket.off('receive_message');
- //  }, []);
+	useEffect(() => {
+    	socket.on("receive_message", (data) => {
+      		setMessageList((list) => [...list, data]);
+    });
+    	return () => socket.off('receive_message');
+  }, []);
 
 	return( 
 		<div className="chat-div">
@@ -40,10 +40,13 @@ function Chat({socket, name, camp}) {
 				  	</textarea>
 				</div>
 				<div className="chat-messages">
-					<div id="you"className="chat-msg">
-						<p id="author"> levkac <span id="timeid">[10:08]</span></p>
-						<p id="message"></p>
+				{msgList.map((content, index) => {
+            		return (
+					<div id={name === content.name ? "you" : "other"}  key={index}className="chat-msg">
+						<p id="author"> {content.name} <span id="timeid">{content.time}</span></p>
+						<p id="message">{content.message}</p>
 					</div>
+					)})}
 				</div>
 			</div>
 		</div>
