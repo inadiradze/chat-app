@@ -8,17 +8,18 @@ function Chat({socket, name, camp}) {
 	const [msgList, setMessageList] = useState([]);
 	const [msg, setMsg] = useState("");
 
-	async function sendMsg(){
+	async function sendMsg(evt){
 	    	
-	    if(msg !== ""){
-
+	    if(msg !== "" && evt.key === 'Enter' && !evt.shiftKey){
+	      evt.preventDefault();
+	      console.log(msg);
 	      let dateTime = new Date();
 	      var minutes = ("0" + dateTime.getMinutes()).substr(-2);
 
 	      const msgData = {name: name, message: msg, camp: camp, time: dateTime.getHours() + ":" + minutes
 	         }
 
-	      await socket.emit("send_message", msgData);
+	      // await socket.emit("send_message", msgData);
 	       setMessageList((list) => [...list, msgData]);
 	      setMsg("");
     }
@@ -35,7 +36,14 @@ function Chat({socket, name, camp}) {
 		<div className="chat-div">
 			<div className="chat-window">
 				<div className="chat-input">
-				<textarea className="chat-textinput" placeholder="Say something..." value={msg} onChange={e => setMsg(e.target.value)}> </textarea>
+					<textarea className="chat-textinput" placeholder="Say something..." value={msg} onChange={e => setMsg(e.target.value)} onKeyPress={sendMsg}> 
+				  	</textarea>
+				</div>
+				<div className="chat-messages">
+					<div id="you"className="chat-msg">
+						<p id="author"> levkac <span id="timeid">[10:08]</span></p>
+						<p id="message"></p>
+					</div>
 				</div>
 			</div>
 		</div>

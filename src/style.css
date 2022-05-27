@@ -10,7 +10,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #232323;
+  background: black;
 }
 
 /* Handle on hover */
@@ -108,15 +108,56 @@ header .camp-h{
 .chat-div {
   margin-top: 200px;
   height: 50%;
+  width: 90%;
+  max-width: 90%;
   max-height: 50%;
 }
 
+.chat-messages {
+  overflow-y: auto;
+  height: 35vh;
+  max-height: 35vh;
+  position: relative;
+  width: 60vw;
+  max-width: 60vw;
+  left: 50%;
+  padding-right: 15vw;
+  margin-top: 3vh;
+  transform: translateX(-50%);
+  text-align: left;
+  word-wrap: break-word;
+  
+}
+
+.chat-msg {
+  font-size: 19px;
+}
+
+#timeid {
+  margin-left: 10px;
+  color: white;
+}
+
+#author {
+  font-style: italic;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.chat-msg #author {
+  margin-top: 30px;
+}
+
+
 .chat-input {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 44vh;
 }
 
 .chat-input textarea {
-  margin-left: 25px;
+  margin-left: 20px;
   border: none;
   background: rgba(0, 0, 0, 0.0);
   color: white;
@@ -124,6 +165,7 @@ header .camp-h{
   font-size: 15px;
   transition: 0.4s ease;
   padding: 30px;
+  padding-bottom: 10px;
   resize: none;
 }
 
