@@ -23,15 +23,17 @@ io.on("connection", (socket) => {
 	console.log(`${socket.id} has connected`);
 
 	socket.on("join-camp", (data, name) => {
+		// const found = users.some(el => el.user === name && el.camp === data);
 		if(socket.oldCamp){
 			socket.leave(socket.oldCamp);
 			socket.oldCamp = null;
 		}
-		socket.join(data);
-		socket.oldCamp = data;
-		users.push({camp: data,
-					user: name});
-		console.log(users);
+
+			socket.join(data);
+			socket.oldCamp = data;
+			users.push({camp: data,
+						user: name});
+			console.log(users);
 	});
 
 	socket.on("send_message", (data) => {

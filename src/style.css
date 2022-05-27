@@ -22,7 +22,62 @@ body {
   background-color: #181818;
   margin: 0;
   padding: 0;
-  color: white;
   box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+main {
+  min-height: 100vh;
+ 
+}
+
+.app {
   font-family: "montseratt", sans-serif;
+  transition: 0.4 ease-out;
+}
+
+.bg-app {
+  background-image: url('./assets/camp4.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+header{
+  color: white;
+  position: absolute;
+  width: 100%;
+}
+
+header .icon-menu {
+  float: right;
+  margin-right: 25px;
+  width: 45px;
+  margin-top: 28px;
+}
+
+.icon-menu:hover, .camp-h:hover {
+  cursor: pointer;
+}
+
+header .camp-h{
+  float: left;
+  font-size: 35px;
+  color: white;
+
+  width: 150px;
+  font-stretch: condensed;
+  margin-left: 25px;
+  margin-top: 30px;
+}
+
+
+
+
+
+
+@media(min-width: 640px){
+  .bg-app{
+    background-position-y: -65px;
+  }
 }

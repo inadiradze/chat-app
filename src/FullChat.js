@@ -23,12 +23,11 @@ function FullChat(){
   return (
 
     <div className="camp-selector">
-      <h3> Join a chat </h3>
-      <input onChange={(e) => {setName(e.target.value)}} value={name} type="text" placeholder="What's your name?" />
-      <input onKeyPress={ (e) => {e.key === 'Enter' && joinCamp()}} onChange={ (e) => {setCamp(e.target.value)}} value={camp} type="text" placeholder="Which camp you want to join?" />
-      {showChat && (
-      <Chat camp={camp} socket={socket} name={name} /> )}
-     </div>
+      <header>
+        <p className="camp-h">Karavi</p>
+        <img className="icon-menu" src="iconMenu.png"></img>
+      </header>
+    </div>
   )
 }
 

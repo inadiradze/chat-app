@@ -4,8 +4,12 @@ import FullChat from "./FullChat";
 function App() {
 
   return (
-    <div className="app">
-      <FullChat />
+    <div className="bg-app">
+      <div className="app blur">
+      <main>
+        <FullChat />
+      </main>
+      </div>
     </div>
 )};
 
