@@ -23,6 +23,8 @@ io.on("connection", (socket) => {
 	console.log(`${socket.id} has connected`);
 
 	socket.on("join-camp", (data, user) => {
+		let username = user;
+		let campname = data;
 		const found = users.some(el => el.user === user && el.camp === data);
 		if(socket.oldCamp){
 			socket.leave(socket.oldCamp);
@@ -46,8 +48,8 @@ io.on("connection", (socket) => {
 	});
 
 	socket.on("disconnect", () => {
+		socket.emit("left");
     	console.log("User Disconnected", socket.id);
-
  	 });
 });
 

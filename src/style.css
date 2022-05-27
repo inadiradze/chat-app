@@ -108,7 +108,6 @@ header .camp-h{
 .camp-div, .chat-div {
   display: flex;
   flex-direction: column;
-  display: flex;
   text-align: center;
   font-size: 24px;
   position: absolute;
@@ -244,5 +243,63 @@ header .camp-h{
 @media(min-width: 640px){
   .bg-app{
     background-position-y: -65px;
+  }
+
+  .camp-div, .chat-div {
+    margin-top: 180px;
+    min-width: 50%;
+    max-width: 50%;
+    overflow-x: hidden;
+}
+
+  .chat-div {
+    min-height: 62%;
+    max-height: 62%;
+    margin-top: 130px;
+  }
+
+  .chat-messages {
+    margin-top: 78px;
+    margin-left: 15vw;
+    max-width: max-content;
+  }
+
+  .msg-container {
+    height: 40vh;
+    max-height: 40vh;
+    position: relative;
+    max-width: 75%;
+  }
+
+  .chat-messages .chat-msg {
+    overflow-x: hidden;
+    font-size: 17px;
+  }
+
+  .chat-messages .full-msg {
+    margin-top: 0px;
+  }
+
+  #other{
+    margin-left: 2px;
+    justify-content: flex-start;
+  }
+
+  #timeid {
+    font-size: 12px;
+  }
+
+  #you {
+    margin-right: 30px;
+    justify-content: flex-end;
+  }
+
+
+  .chat-msg {
+    display: flex;
+  }
+
+  .camp-div input{
+    max-width: fit-content;
   }
 }

@@ -20,7 +20,6 @@ function FullChat(){
         setError("Name is taken...");
       });
   }
- 
 
   function joinCamp(evt){
     if(evt.key === 'Enter' && camp !== "" && name!== "") {
@@ -33,7 +32,8 @@ function FullChat(){
   };
 
     return(
-      <div>
+      <div className="home-div">
+  
         {showChat ? ( <Chat socket={socket} name={nameSet} camp={campSet} />) : (
 
         <div className="camp-selector">
