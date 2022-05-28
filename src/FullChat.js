@@ -13,13 +13,6 @@ function FullChat(){
   const [showChat, setShowChat] = useState (false);
   const [error, setError] = useState("");
 
-  function checkName(){
-    socket.on("user-taken", ()=> {
-        setShowChat(false);
-        setError("Name is taken...");
-      });
-  }
-
   function checkForSession(){
     if(localStorage.getItem("camp") !== null && localStorage.getItem("name") !== null){
       const localCamp = localStorage.getItem("camp");
@@ -32,18 +25,17 @@ function FullChat(){
 
   function joinCamp(evt){
     if(evt.key === 'Enter' && camp !== "" && name!== "") {
-      checkName();
-      socket.emit("join-camp", camp, name);
-      localStorage.setItem("camp", camp);
-      localStorage.setItem("name", name);
-      setCamp(""); setName("");
-      setShowChat(true);
+      if(camp.length > 10 || name.length > 10){
+        setError("Camp or user names must not be more than 10 characters...");
+      }else{
+        socket.emit("join-camp", camp, name);
+        localStorage.setItem("camp", camp);
+        localStorage.setItem("name", name);
+        setCamp(""); setName("");
+        setShowChat(true);
+      }
     }
   };
-
-  useEffect( ()=> {
-    checkForSession();
-  }, []);
 
     return(
       <div className="home-div">

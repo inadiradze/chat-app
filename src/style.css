@@ -93,12 +93,13 @@ header .camp-h{
 }
 
 .error-div {
-  margin-top: 25px;
-  max-width: 80%;
-  max-height: 5vh;
-  font-size: 22px;
+  margin-top: 5vh;
+  max-width: 70vw;
+  font-size: 21px;
   font-style: italic;
   color: #ccc;
+  font-stretch: condensed;
+
 }
 
 .icon-menu:hover {
@@ -146,7 +147,7 @@ header .camp-h{
   height: 60%;
   width: 90%;
   max-width: 90%;
-  max-height: 60%;
+  max-height: 100%;
 }
 
 .camp-name {
@@ -255,6 +256,8 @@ header .camp-h{
 }
 
 #other{
+  max-width: 40vw;
+  word-break: break-all;
   margin-left: 2px;
   justify-content: flex-start;
 } 
@@ -300,11 +303,11 @@ header .camp-h{
   }
 
   .chat-input {
-    margin-top: 64vh;
+    margin-top: 62vh;
   }
 
   .chat-messages {
-    margin-top: 9vh;
+    margin-top: 8vh;
     margin-left: 8vw;
     height: 55vh;
     max-height: 55vh;

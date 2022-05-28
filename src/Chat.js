@@ -31,7 +31,6 @@ function Chat({socket, name, camp}) {
     	socket.on("receive_message", (data) => {
       		setMessageList((list) => [...list, data]);
     });
-    	console.log("ae");
     	return () => socket.off('receive_message');
   }, []);
 
