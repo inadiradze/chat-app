@@ -16,28 +16,20 @@ const io = new Server(server, {
  	 },
 });
 
-let users = [];
-
-
 io.on("connection", (socket) => {
 	console.log(`${socket.id} has connected`);
 
 	socket.on("join-camp", (data, user) => {
 		let username = user;
 		let campname = data;
-		const found = users.some(el => el.user === user && el.camp === data);
+
 		if(socket.oldCamp){
 			socket.leave(socket.oldCamp);
 			socket.oldCamp = null;
-		}
-		if(!found){
+		}else{
 			socket.join(data);
 			socket.oldCamp = data;
-			users.push({id: socket.id,camp: data, user: user});
-			console.log(users);
-		}else{
-			console.log("TAKEN");
-			socket.emit("user-taken");
+			console.log(data);
 		}
 	});
 

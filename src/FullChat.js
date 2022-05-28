@@ -9,7 +9,6 @@ const socket = io.connect("http://localhost:4000");
 function FullChat(){
   const [campSet, setCampSet] = useState("");
   const [camp, setCamp] = useState("");
-  const [nameSet, setNameSet] = useState("");
   const [name, setName] = useState("");
   const [showChat, setShowChat] = useState (false);
   const [error, setError] = useState("");
@@ -21,20 +20,34 @@ function FullChat(){
       });
   }
 
+  function checkForSession(){
+    if(localStorage.getItem("camp") !== null && localStorage.getItem("name") !== null){
+      const localCamp = localStorage.getItem("camp");
+      const localName = localStorage.getItem("name"); 
+      setShowChat(true);
+      socket.emit("join-camp", localCamp, localName);
+    }
+    console.log("Checking session...");
+  }
+
   function joinCamp(evt){
     if(evt.key === 'Enter' && camp !== "" && name!== "") {
       checkName();
       socket.emit("join-camp", camp, name);
-      setCampSet(camp); setNameSet(name);
+      localStorage.setItem("camp", camp);
+      localStorage.setItem("name", name);
       setCamp(""); setName("");
       setShowChat(true);
     }
   };
 
+  useEffect( ()=> {
+    checkForSession();
+  }, []);
+
     return(
       <div className="home-div">
-  
-        {showChat ? ( <Chat socket={socket} name={nameSet} camp={campSet} />) : (
+        {showChat ? ( <Chat socket={socket} name={localStorage.getItem("name")} camp={localStorage.getItem("camp")} />) : (
 
         <div className="camp-selector">
           <div className="camp-div">

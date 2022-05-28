@@ -31,6 +31,7 @@ function Chat({socket, name, camp}) {
     	socket.on("receive_message", (data) => {
       		setMessageList((list) => [...list, data]);
     });
+    	console.log("ae");
     	return () => socket.off('receive_message');
   }, []);
 
@@ -47,7 +48,7 @@ function Chat({socket, name, camp}) {
 				{msgList.map((content, index) => {
             		return (
 					<div id={name === content.user ? "you" : "other"}  key={index}className="chat-msg">
-						<p className="full-msg"><span id="author">{content.user}</span> <span id="timeid">{content.time}</span><span id="message">{content.message}</span></p>
+						<p className="full-msg"><span id="author">{content.user}<span id="timeid">{content.time}</span></span><span id="message">{content.message}</span></p>
 						
 					</div>
 					)})}

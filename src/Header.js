@@ -5,7 +5,7 @@ import Home from './Home';
 function Header() {
 	return (
 		<header>
-			<a href="./Home">
+			<a href="/">
 	    		<p className="camp-h">Karavi</p>
 	    	</a>
 	    	<img className="icon-menu" src="menu.png"></img>
