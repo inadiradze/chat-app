@@ -6,16 +6,16 @@ import Header from "./Header";
 import Home from "./Home";
 
 function App() {
-
   return (
     <div className="bg-app">
       <div className="app blur">
         <Header />
-      <main>
-        <Home />
-      </main>
+        <main>
+          <Home />
+        </main>
       </div>
     </div>
-)};
+  );
+}
 
-export default App
+export default App;
