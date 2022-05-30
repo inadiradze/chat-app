@@ -4,7 +4,9 @@ import "./style.css";
 import Chat from "./Chat";
 import { Context } from "./Context";
 
-const socket = io.connect("http://localhost:4000");
+const server = 'http://192.168.0.102:4000';
+
+const socket = io.connect(server);
 
 function FullChat(){
   const [campSet, setCampSet] = useState("");

@@ -39,7 +39,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 main {
@@ -68,7 +68,7 @@ header{
 header .icon-menu {
   float: right;
   margin-right: 28px;
-  width: 38px;
+  width: 33px;
   margin-top: 32px;
 }
 
@@ -78,7 +78,7 @@ header .icon-menu {
 
 header .camp-h{
   float: left;
-  font-size: 35px;
+  font-size: 30px;
   color: white;
   width: 150px;
   font-stretch: condensed;
@@ -95,7 +95,7 @@ header .camp-h{
 .error-div {
   margin-top: 5vh;
   max-width: 70vw;
-  font-size: 21px;
+  font-size: 16px;
   font-style: italic;
   color: #ccc;
   font-stretch: condensed;
@@ -111,7 +111,7 @@ header .camp-h{
   display: flex;
   flex-direction: column;
   text-align: center;
-  font-size: 22px;
+  font-size: 19px;
   position: absolute;
   margin-top: 28vh;
   padding: 10px 0px 40px 0px;
@@ -143,7 +143,7 @@ header .camp-h{
 }
 
 .chat-div {
-  margin-top: 170px;
+  margin-top: 18vh;
   height: 60%;
   width: 90%;
   max-width: 90%;
@@ -167,7 +167,7 @@ header .camp-h{
   max-width: 60vw;
   left: 50%;
   padding-right: 15vw;
-  margin-top: 8vh;
+  margin-top: 9vh;
   transform: translateX(-50%);
   text-align: left;
   word-wrap: break-word;
@@ -223,21 +223,21 @@ header .camp-h{
   margin-top: 53vh;
 }
 
-.chat-input textarea {
-  margin-left: 20px;
+.chat-input input {
   border: none;
-  background: rgba(0, 0, 0, 0.0);
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   outline: none;
+  padding: 3px;
+
   font-size: 15px;
   transition: 0.4s ease;
-  padding: 30px;
-  padding-bottom: 10px;
-  resize: none;
 }
 
-.chat-input textarea::placeholder {
-  color: white;
+.chat-input input::placeholder {
+  display: none;
+  opacity: 0;
 }
 
 .chat-messages .chat-msg {
@@ -255,21 +255,6 @@ header .camp-h{
   margin-top: 10px;
 }
 
-#other{
-  max-width: 40vw;
-  word-break: break-all;
-  margin-left: 2px;
-  justify-content: flex-start;
-} 
-
-#you {
-  min-width: 40vw;
-  max-width: 40vw;
-  margin-left: 27vw;
-  text-align: right;
-  word-break: break-all;
-  justify-content: flex-end;
-}
 
 .chat-msg {
   display: flex;
@@ -281,6 +266,14 @@ header .camp-h{
 @media(min-width: 640px){
   .bg-app{
     background-position-y: -65px;
+  }
+
+  header .camp-h {
+    font-size: 36px;
+  }
+
+  header .icon-menu {
+    width: 38px;
   }
 
   .camp-div {
@@ -303,11 +296,11 @@ header .camp-h{
   }
 
   .chat-input {
-    margin-top: 62vh;
+    margin-top: 67vh;
   }
 
   .chat-messages {
-    margin-top: 8vh;
+    margin-top: 10vh;
     margin-left: 8vw;
     height: 55vh;
     max-height: 55vh;
@@ -316,8 +309,8 @@ header .camp-h{
   }
 
   .msg-container {
-    height: 55vh;
-    max-height: 55vh;
+    height: 50vh;
+    max-height: 50vh;
     position: relative;  
     min-width: 55vw;
     max-width: 55vw;
@@ -356,15 +349,18 @@ header .camp-h{
   }
 
   #you {
-
     max-width: 30vw;
-    margin-left: 11.5vw;
+    text-align: right;
+    margin-left: 22vw;
     justify-content: flex-end;
   }
 
-
   .chat-msg {
     display: flex;
+  }
+
+  .error-div {
+    font-size: 19px;
   }
 
   .camp-div input{
