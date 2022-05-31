@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import io from "socket.io-client";
 import "./style.css";
 import Chat from "./Chat";
-import { Context } from "./Context";
+import {Context} from "./App";
 
 // const server = 'https://dangerous-honey-production.up.railway.app';
 
@@ -12,9 +12,9 @@ function FullChat(){
   const [campSet, setCampSet] = useState("");
   const [camp, setCamp] = useState("");
   const [name, setName] = useState("");
-  const [showChat, setShowChat] = useState (false);
   const [error, setError] = useState("");
-  const [load, setLoad] = useState(false);
+  const {showChat, setShowChat} = useContext(Context);
+
 
   function checkForSession(){
     if(localStorage.getItem("camp") !== null && localStorage.getItem("name") !== null){
