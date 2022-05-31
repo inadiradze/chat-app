@@ -148,6 +148,7 @@ header .camp-h{
   width: 90%;
   max-width: 90%;
   max-height: 100%;
+  
 }
 
 .camp-name {
@@ -163,23 +164,26 @@ header .camp-h{
   height: 38vh;
   max-height: 38vh;
   position: relative;
-  width: 60vw;
-  max-width: 60vw;
+  width: 63vw;
+  max-width: 63vw;
   left: 50%;
-  padding-right: 15vw;
+  padding-right: 14vw;
   margin-top: 9vh;
   transform: translateX(-50%);
   text-align: left;
-  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .msg-container {
   height: 38vh;
   max-height: 38vh;
   position: relative;
-  width: 75vw;
-  max-width: 75vw;
+  width: 77.5vw;
+  max-width: 77.5vw;
+}
 
+.chat-msg p {
+  max-width: 70vw;
 }
 
 .msg-container::-webkit-scrollbar{
@@ -211,9 +215,6 @@ header .camp-h{
   margin-top: 10px;
 }
 
-.chat-msg p {
-  max-width: 29vh;
-}
 
 
 .chat-input {
@@ -263,6 +264,8 @@ header .camp-h{
 
 
 
+
+
 @media(min-width: 640px){
   .bg-app{
     background-position-y: -65px;
@@ -291,8 +294,8 @@ header .camp-h{
     margin-top: 13vh;
     min-width: 60vw;
     max-width: 60vw;
+    border-radius: 50px;
     min-height: 70vh;
-    border-radius: 100px;
   }
 
   .chat-input {
@@ -306,6 +309,7 @@ header .camp-h{
     max-height: 55vh;
     min-width: 55vw;
     max-width: 55vw;
+
   }
 
   .msg-container {
@@ -328,7 +332,6 @@ header .camp-h{
   .full-msg #message{
     display: flex;
     margin-top: 2vh;
-    word-break: break-all;
   }
 
   #you #message {
@@ -336,8 +339,12 @@ header .camp-h{
   }
 
   #other{
-    margin-left: 1.5vw;
+    margin-left: 1vw;
     justify-content: flex-start;
+  }
+
+  #other p {
+    max-width: 55%;
   }
 
   #timeid {
@@ -345,13 +352,13 @@ header .camp-h{
   }
 
   #you p {
-    max-width: 30vw;
+    max-width: 60%;
   }
 
+
   #you {
-    max-width: 30vw;
     text-align: right;
-    margin-left: 22vw;
+    margin-right: 2.2vw;
     justify-content: flex-end;
   }
 

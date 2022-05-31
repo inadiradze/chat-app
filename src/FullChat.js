@@ -4,9 +4,9 @@ import "./style.css";
 import Chat from "./Chat";
 import { Context } from "./Context";
 
-const server = 'https://dangerous-honey-production.up.railway.app';
+// const server = 'https://dangerous-honey-production.up.railway.app';
 
-const socket = io.connect(server);
+const socket = io.connect('192.168.0.102:4000');
 
 function FullChat(){
   const [campSet, setCampSet] = useState("");
@@ -14,25 +14,29 @@ function FullChat(){
   const [name, setName] = useState("");
   const [showChat, setShowChat] = useState (false);
   const [error, setError] = useState("");
+  const [load, setLoad] = useState(false);
 
   function checkForSession(){
     if(localStorage.getItem("camp") !== null && localStorage.getItem("name") !== null){
       const localCamp = localStorage.getItem("camp");
       const localName = localStorage.getItem("name"); 
       setShowChat(true);
-      socket.emit("join-camp", localCamp, localName);
+      socket.emit("join-oldcamp", localCamp, localName);
     }
-    console.log("Checking session...");
   }
+
+  useEffect ( () => {
+    checkForSession();
+  }, []);
 
   function joinCamp(evt){
     if(evt.key === 'Enter' && camp !== "" && name!== "") {
       if(camp.length > 10 || name.length > 10){
         setError("Camp or user names must not be more than 10 characters...");
       }else{
-        socket.emit("join-camp", camp, name);
         localStorage.setItem("camp", camp);
         localStorage.setItem("name", name);
+        socket.emit("join-camp", camp, name);
         setCamp(""); setName("");
         setShowChat(true);
       }
