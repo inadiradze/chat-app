@@ -124,6 +124,35 @@ header .camp-h{
   transform: translateX(-50%);
 }
 
+.menu-div {
+  margin-top: 18vh;
+  min-width: 90%;
+}
+
+.menu-options {
+  color: white;
+  font-size: 17px;
+  margin-top: 38vh;
+}
+
+.menu-options p {
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.menu-h {
+  font-size: 20px;
+  color: #ccc;
+}
+
+
+.menu-options:hover {
+  color: #ccc;
+  cursor: pointer;
+}
+
+
+
 .camp-div input {
   appearance: none;
   border: none;
@@ -282,6 +311,19 @@ header .camp-h{
     font-size: 20px;
   }
 
+  .menu-div {
+    border-radius: 50px;
+    margin-top: 13vh;
+    min-width: 60vw;
+    max-width: 60vw;
+    max-height: 70vh;
+    border-radius: 50px;
+  }
+
+  .menu-options {
+    margin-top: 50vh;
+  }
+
   .camp-div, .chat-div {
     margin-top: 27vh;
     min-width: 50%;
@@ -296,6 +338,8 @@ header .camp-h{
     border-radius: 50px;
     min-height: 70vh;
   }
+
+
 
   .chat-input {
     margin-top: 67vh;
@@ -371,5 +415,19 @@ header .camp-h{
 
   .camp-div input{
     max-width: fit-content;
+  }
+}
+
+@media(min-height: 1000px) {
+  .menu-div {
+    margin-top: 13vh;
+    min-width: 60vw;
+    max-width: 60vw;
+    border-radius: 50px;
+    min-height: 70vh;
+  }
+
+  .menu-options {
+    margin-top: 56vh;
   }
 }
