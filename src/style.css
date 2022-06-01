@@ -124,15 +124,16 @@ header .camp-h{
   transform: translateX(-50%);
 }
 
-.menu-div {
-  margin-top: 18vh;
-  min-width: 90%;
-}
-
 .menu-options {
   color: white;
   font-size: 17px;
-  margin-top: 38vh;
+  position: absolute;
+  bottom: 20px;
+}
+
+.menu-h {
+  font-size: 20px;
+  color: #ccc
 }
 
 .menu-options p {
@@ -140,15 +141,11 @@ header .camp-h{
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.menu-h {
-  font-size: 20px;
-  color: #ccc;
-}
-
 
 .menu-options:hover {
   color: #ccc;
   cursor: pointer;
+
 }
 
 
@@ -171,12 +168,12 @@ header .camp-h{
   color: black;
 }
 
-.chat-div {
+.chat-div, .menu-div {
   margin-top: 18vh;
-  height: 60%;
+  min-height: 60%;
   width: 90%;
   max-width: 90%;
-  max-height: 100%;  
+  max-height: 60%;  
 }
 
 
@@ -249,7 +246,7 @@ header .camp-h{
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 53vh;
+  bottom: 35px;
 }
 
 .chat-input input {
@@ -311,19 +308,6 @@ header .camp-h{
     font-size: 20px;
   }
 
-  .menu-div {
-    border-radius: 50px;
-    margin-top: 13vh;
-    min-width: 60vw;
-    max-width: 60vw;
-    max-height: 70vh;
-    border-radius: 50px;
-  }
-
-  .menu-options {
-    margin-top: 50vh;
-  }
-
   .camp-div, .chat-div {
     margin-top: 27vh;
     min-width: 50%;
@@ -331,18 +315,12 @@ header .camp-h{
     overflow: hidden;
   }
 
-  .chat-div {
+  .chat-div, .menu-div {
     margin-top: 13vh;
     min-width: 60vw;
     max-width: 60vw;
     border-radius: 50px;
     min-height: 70vh;
-  }
-
-
-
-  .chat-input {
-    margin-top: 67vh;
   }
 
   .chat-messages {
@@ -418,16 +396,48 @@ header .camp-h{
   }
 }
 
-@media(min-height: 1000px) {
-  .menu-div {
-    margin-top: 13vh;
-    min-width: 60vw;
-    max-width: 60vw;
-    border-radius: 50px;
-    min-height: 70vh;
+@media(max-height: 600px){
+
+  .empty-header {
+    min-height: 10px;
   }
 
-  .menu-options {
-    margin-top: 56vh;
+  .menu-div {
+    margin-top: 110px;
   }
+  
+  .chat-div {
+    position: relative;
+    
+  }
+
+  .camp-name {
+    position: relative;
+  }
+
+  .empty-footer {
+    min-height: 60px;
+  }
+
+  .chat-input { 
+   bottom: 20px;
+  }
+ 
+  .chat-msg {
+    margin-top: 1vh;
+  }
+
+  .chat-messages {
+    height: 60vh;
+    max-height: 70vh;
+
+  }
+
+  .msg-container {
+    height: 50vh;
+    max-height: 50vh;
+    position: relative;  
+  }
+
 }
+

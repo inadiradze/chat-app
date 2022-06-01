@@ -45,7 +45,8 @@ function Chat({ socket, name, camp }) {
       <div className="chat-div">
         <div className="chat-window">
           <p className="camp-name">{camp}</p>
-          
+          <div className="empty-div"></div>
+       
           <div className="chat-input">
             <input
               type="text"
@@ -56,6 +57,7 @@ function Chat({ socket, name, camp }) {
               onKeyPress={sendMsg}
             ></input>
           </div>
+
           <div className="chat-messages">
             <ScrollToBottom className="msg-container">
               {msgList.map((content, index) => {
@@ -79,7 +81,9 @@ function Chat({ socket, name, camp }) {
           </div>
         </div>
       </div>) : (<Menu />)}
+    <div className="empty-footer"></div>
     </div>
+
   );
 }
 
