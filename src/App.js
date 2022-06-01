@@ -9,9 +9,10 @@ function App() {
 
   const [showChat, setShowChat] = useState (false);
   const [menu, setMenu] = useState(false);
+  const [leave, setLeave] =  useState(false);
 
   return (
-    <Context.Provider value={{showChat, setShowChat, menu, setMenu}}>
+    <Context.Provider value={{showChat, setShowChat, menu, setMenu, leave, setLeave}}>
     <div className="bg-app">
       <div className="app blur">
         <Header />

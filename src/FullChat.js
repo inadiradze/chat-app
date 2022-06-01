@@ -14,6 +14,8 @@ function FullChat(){
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const {showChat, setShowChat} = useContext(Context);
+  const {leave, setLeave} = useContext(Context);
+  const {menu, setMenu} = useContext(Context);
 
 
   function checkForSession(){
@@ -24,10 +26,6 @@ function FullChat(){
       socket.emit("join-oldcamp", localCamp, localName);
     }
   }
-
-  useEffect ( () => {
-    checkForSession();
-  }, []);
 
   function joinCamp(evt){
     if(evt.key === 'Enter' && camp !== "" && name!== "") {
@@ -42,6 +40,27 @@ function FullChat(){
       }
     }
   };
+
+  function leaveCamp(campName, userName){
+    socket.emit("leave-camp", campName, userName);
+    setLeave(false);
+    localStorage.removeItem("camp");
+    localStorage.removeItem("name");
+    setShowChat(false);
+    setMenu(false);
+  };
+
+  useEffect ( () => {
+    checkForSession();
+  }, []);
+
+  useEffect ( () => {
+    const localCamp = localStorage.getItem("camp");
+    const localName = localStorage.getItem("name"); 
+    if(leave){
+      leaveCamp(localCamp, localName);
+    }
+  }, [leave]);
 
     return(
       <div className="home-div">
@@ -61,7 +80,9 @@ function FullChat(){
             </div>)}
           </div>
         </div>)}
+        <div className="empty-footer"></div>
       </div>
+
   )};
 
 export default FullChat

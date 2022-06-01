@@ -33,11 +33,13 @@ function Chat({ socket, name, camp }) {
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
-      console.log(menu);
     });
+
     return () => {socket.off("receive_message")
     };
   }, []);
+
+  
 
   return (
     <div>

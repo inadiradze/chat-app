@@ -68,7 +68,7 @@ header{
 header .icon-menu {
   float: right;
   margin-right: 28px;
-  width: 33px;
+  width: 32px;
   margin-top: 32px;
 }
 
@@ -78,7 +78,7 @@ header .icon-menu {
 
 header .camp-h{
   float: left;
-  font-size: 30px;
+  font-size: 29px;
   color: white;
   width: 150px;
   font-stretch: condensed;
@@ -95,7 +95,7 @@ header .camp-h{
 .error-div {
   margin-top: 5vh;
   max-width: 70vw;
-  font-size: 16px;
+  font-size: 15px;
   font-style: italic;
   color: #ccc;
   font-stretch: condensed;
@@ -111,7 +111,7 @@ header .camp-h{
   display: flex;
   flex-direction: column;
   text-align: center;
-  font-size: 19px;
+  font-size: 18px;
   position: absolute;
   margin-top: 28vh;
   padding: 10px 0px 40px 0px;
@@ -126,23 +126,25 @@ header .camp-h{
 
 .menu-options {
   color: white;
-  font-size: 17px;
   position: absolute;
   bottom: 20px;
 }
 
 .menu-h {
-  font-size: 20px;
-  color: #ccc
+  font-size: 19px;
+  color: #ccc;
 }
 
 .menu-options p {
-  padding: 12px;
+  color: white;
+  padding: 11px;
+  font-size: 15px;
   background-color: rgba(0, 0, 0, 0.5);
+
 }
 
 
-.menu-options:hover {
+.menu-options p:hover {
   color: #ccc;
   cursor: pointer;
 
@@ -154,7 +156,7 @@ header .camp-h{
   appearance: none;
   border: none;
   outline: none;
-  font-size: 15px;
+  font-size: 14px;
   color: black;
   width: 80%;
   background-color: white;
@@ -212,6 +214,15 @@ header .camp-h{
   max-width: 70vw;
 }
 
+.menu-div {
+  margin-top: 28vh;
+  min-height: 35vh;
+  min-width: 90vw;
+  max-width: 90vw;
+  border-radius: 0;
+}
+
+
 .msg-container::-webkit-scrollbar{
   display: none;
 }
@@ -222,18 +233,18 @@ header .camp-h{
 
 .chat-msg {
   margin-top: 20px;
-  font-size: 19px;
+  font-size: 18px;
 }
 
 #timeid {
   font-style: italic;
-  margin-left: 10px;
+  margin-left: 9px;
   color: white;
 }
 
 #author {
   font-style: italic;
-  font-size: 14px;
+  font-size: 13px;
   color: #ccc;
 }
 
@@ -257,7 +268,7 @@ header .camp-h{
   outline: none;
   padding: 3px;
 
-  font-size: 15px;
+  font-size: 14px;
   transition: 0.4s ease;
 }
 
@@ -268,7 +279,7 @@ header .camp-h{
 
 .chat-messages .chat-msg {
   overflow-x: hidden;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .chat-msg .full-msg {
@@ -315,13 +326,22 @@ header .camp-h{
     overflow: hidden;
   }
 
-  .chat-div, .menu-div {
+  .chat-div{
     margin-top: 13vh;
     min-width: 60vw;
     max-width: 60vw;
-    border-radius: 50px;
+    border-radius: 30px;
     min-height: 70vh;
   }
+
+  .menu-div {
+    margin-top: 27vh;
+    min-height: 40vh;
+    min-width: 45vw;
+    max-width: 45vw;
+    border-radius: 30px;
+}
+
 
   .chat-messages {
     margin-top: 10vh;
@@ -376,6 +396,10 @@ header .camp-h{
     max-width: 60%;
   }
 
+  .menu-options p{
+    font-size: 14px;
+  }
+
 
   #you {
     text-align: right;
@@ -402,13 +426,14 @@ header .camp-h{
     min-height: 10px;
   }
 
-  .menu-div {
-    margin-top: 110px;
+  .bg-app {
+    background-size: cover;
+    background-position-Y: -30px;
+    background-size: 900px;
   }
   
-  .chat-div {
+  .chat-div, .camp-div, .menu-div {
     position: relative;
-    
   }
 
   .camp-name {
