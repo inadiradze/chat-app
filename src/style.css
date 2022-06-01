@@ -39,7 +39,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden;
+  
 }
 
 main {
@@ -107,7 +107,7 @@ header .camp-h{
 }
 
 
-.camp-div, .chat-div {
+.camp-div, .chat-div, .menu-div {
   display: flex;
   flex-direction: column;
   text-align: center;
