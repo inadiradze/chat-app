@@ -8,7 +8,7 @@ function Chat({ socket, name, camp }) {
   const [msgList, setMessageList] = useState([]);
   const [msg, setMsg] = useState("");
   const {menu} = useContext(Context);
-
+  
   async function sendMsg(evt) {
     if (evt.key == "Enter") {
       evt.preventDefault();
@@ -35,11 +35,9 @@ function Chat({ socket, name, camp }) {
       setMessageList((list) => [...list, data]);
     });
 
-    return () => {socket.off("receive_message")
+    return () => {socket.off("receive_message"); socket.off("leave-camp");
     };
   }, []);
-
-  
 
   return (
     <div>
@@ -61,7 +59,9 @@ function Chat({ socket, name, camp }) {
           </div>
 
           <div className="chat-messages">
+
             <ScrollToBottom className="msg-container">
+
               {msgList.map((content, index) => {
                 return (
                   <div
@@ -72,13 +72,14 @@ function Chat({ socket, name, camp }) {
                     <p className="full-msg">
                       <span id="author">
                         {content.user}
-                        <span id="timeid">{content.time}</span>
                       </span>
+                      <span id="timeid">{content.time}</span>
                       <span id="message">{content.message}</span>
                     </p>
                   </div>
                 );
               })}
+              
             </ScrollToBottom>
           </div>
         </div>

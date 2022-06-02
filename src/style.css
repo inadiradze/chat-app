@@ -248,6 +248,14 @@ header .camp-h{
   color: #ccc;
 }
 
+
+#left {
+  margin-left: 6px;
+  font-style: italic;
+  color: #ccc;
+  font-size: 13px;
+}
+
 .chat-msg #author {
   margin-top: 10px;
 }

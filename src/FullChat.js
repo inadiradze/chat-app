@@ -18,10 +18,12 @@ function FullChat(){
   const {menu, setMenu} = useContext(Context);
 
 
+
   function checkForSession(){
     if(localStorage.getItem("camp") !== null && localStorage.getItem("name") !== null){
       const localCamp = localStorage.getItem("camp");
-      const localName = localStorage.getItem("name"); 
+      const localName = localStorage.getItem("name");
+      
       setShowChat(true);
       socket.emit("join-oldcamp", localCamp, localName);
     }
@@ -32,9 +34,18 @@ function FullChat(){
       if(camp.length > 10 || name.length > 10){
         setError("Camp or user names must not be more than 10 characters...");
       }else{
+        let dateTime = new Date();
+        var minutes = ("0" + dateTime.getMinutes()).substr(-2);
+        const joinData = {
+              user: name + '  has joined the camp',
+              message: null,
+              camp: camp,
+              time: dateTime.getHours() + ":" + minutes,
+        };
+
         localStorage.setItem("camp", camp);
         localStorage.setItem("name", name);
-        socket.emit("join-camp", camp, name);
+        socket.emit("join-camp", camp, name, joinData);
         setCamp(""); setName("");
         setShowChat(true);
       }
@@ -42,7 +53,16 @@ function FullChat(){
   };
 
   function leaveCamp(campName, userName){
-    socket.emit("leave-camp", campName, userName);
+    let dateTime = new Date();
+        var minutes = ("0" + dateTime.getMinutes()).substr(-2);
+    const leaveData = {
+          user: userName + '  has left the camp',
+          message: null,
+          camp: campName,
+          time: dateTime.getHours() + ":" + minutes,
+    };
+
+    socket.emit("leave-camp", leaveData);
     setLeave(false);
     localStorage.removeItem("camp");
     localStorage.removeItem("name");
