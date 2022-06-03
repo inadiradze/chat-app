@@ -124,10 +124,25 @@ header .camp-h{
   transform: translateX(-50%);
 }
 
+
+.userlist {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  margin-top: 30px;
+  
+  min-height: 25vh;
+  width: 80%
+}
+
+.userlist p {
+  margin-top: 1vh;
+  font-size: 15px;
+}
+
 .menu-options {
   color: white;
-  position: absolute;
-  bottom: 20px;
+  margin-top: 20px;
 }
 
 .menu-h {
@@ -178,7 +193,6 @@ header .camp-h{
   max-height: 60%;  
 }
 
-
 .camp-name {
   position: absolute;
   left: 50%;
@@ -215,12 +229,13 @@ header .camp-h{
 }
 
 .menu-div {
-  margin-top: 28vh;
-  min-height: 35vh;
+  margin-top: 22vh;
+  min-height: initial;
   min-width: 90vw;
   max-width: 90vw;
   border-radius: 0;
 }
+
 
 
 .msg-container::-webkit-scrollbar{
@@ -242,11 +257,19 @@ header .camp-h{
   color: white;
 }
 
-#author {
+#author, #connection-info {
   font-style: italic;
   font-size: 13px;
   color: #ccc;
 }
+
+#you #author {
+  color: white;
+}
+
+#you #timeid {
+  color: #ccc;
+  }
 
 
 #left {
@@ -306,7 +329,17 @@ header .camp-h{
 }
 
 
+.chat-msg .info-msg { 
+ margin-top: 5px;
+}
 
+#connection-info {
+  margin-left: 2px;
+}
+
+.info-msg #author {
+  color: white;
+}
 
 
 
@@ -343,13 +376,16 @@ header .camp-h{
   }
 
   .menu-div {
-    margin-top: 27vh;
-    min-height: 40vh;
+    margin-top: 20vh;
+    min-height: initial;
     min-width: 45vw;
     max-width: 45vw;
     border-radius: 30px;
-}
+  }
 
+  .userlist p {
+    font-size: 16px;
+  }
 
   .chat-messages {
     margin-top: 10vh;
@@ -404,6 +440,14 @@ header .camp-h{
     max-width: 60%;
   }
 
+  #you #author {
+    color: #ccc;
+  }
+
+  #you #timeid {
+    color: white;
+  }
+
   .menu-options p{
     font-size: 14px;
   }
@@ -426,6 +470,10 @@ header .camp-h{
   .camp-div input{
     max-width: fit-content;
   }
+
+  .chat-msg .info-msg {
+    margin-top: 0px;
+  }
 }
 
 @media(max-height: 600px){
@@ -442,6 +490,10 @@ header .camp-h{
   
   .chat-div, .camp-div, .menu-div {
     position: relative;
+  }
+
+  .menu-div {
+    max-height: 52vh;
   }
 
   .camp-name {

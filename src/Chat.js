@@ -8,6 +8,7 @@ function Chat({ socket, name, camp }) {
   const [msgList, setMessageList] = useState([]);
   const [msg, setMsg] = useState("");
   const {menu} = useContext(Context);
+  const {joined, setJoined} = useContext(Context);
   
   async function sendMsg(evt) {
     if (evt.key == "Enter") {
@@ -35,7 +36,11 @@ function Chat({ socket, name, camp }) {
       setMessageList((list) => [...list, data]);
     });
 
-    return () => {socket.off("receive_message"); socket.off("leave-camp");
+    socket.on("joined-list", (data) => {
+      setJoined((list) => [...list, data]);
+    })
+
+    return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("joined-list");
     };
   }, []);
 
@@ -69,10 +74,11 @@ function Chat({ socket, name, camp }) {
                     key={index}
                     className="chat-msg"
                   >
-                    <p className="full-msg">
+                    <p className={content.type != null ? "info-msg" : "full-msg"}>
                       <span id="author">
                         {content.user}
                       </span>
+                      {content.type != null && <span id="connection-info"> {content.info} </span>}
                       <span id="timeid">{content.time}</span>
                       <span id="message">{content.message}</span>
                     </p>
