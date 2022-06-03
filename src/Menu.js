@@ -11,7 +11,7 @@ function Menu(){
 			<div className="menu-div">
 				
 				<div className="userlist">
-
+				<span className="menu-h"> Menu </span>
 				</div>
 				<div className="menu-options">
 					<p onClick={()=> setLeave(true)}className="menu-leave"> Leave camp </p>
