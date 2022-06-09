@@ -6,7 +6,7 @@ import {Context} from "./App";
 
 const server = 'https://karavi-server.up.railway.app/';
 
-const socket = io.connect(server);
+const socket = io.connect('192.168.0.103:4000');
 
 function FullChat(){
   const [campSet, setCampSet] = useState("");
@@ -16,9 +16,10 @@ function FullChat(){
   const {showChat, setShowChat} = useContext(Context);
   const {leave, setLeave} = useContext(Context);
   const {menu, setMenu} = useContext(Context);
+  const {typing, setTyping} = useContext(Context);
 
 
-  function messageData(username, info, message, campname, name) {
+  function messageData(username, info, message, campname, name, typing) {
     let dateTime = new Date();
     var minutes = ("0" + dateTime.getMinutes()).substr(-2);
     const msgData = {
@@ -29,6 +30,7 @@ function FullChat(){
               name: name,
               time: dateTime.getHours() + ":" + minutes,
               type: 'info',
+              typing: typing,
         };
     return msgData;
   }
@@ -74,6 +76,15 @@ function FullChat(){
   useEffect ( () => {
     checkForSession();
   }, []);
+
+  useEffect ( () => {
+    if(typing){
+      const localCamp = localStorage.getItem("camp");
+      const localName = localStorage.getItem("name");
+      console.log('typing');
+      socket.emit("typing", messageData(localName, ' is typing ...', null, localCamp, localName, 'yes'));
+    }
+  }, [typing]);
 
   useEffect ( () => {
     const localCamp = localStorage.getItem("camp");

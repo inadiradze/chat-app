@@ -293,7 +293,7 @@ header .camp-h{
 
 .chat-input input {
   border: none;
-  border-color: rgba(255, 255, 255, 0.7);
+  
   background: rgba(255, 255, 255, 0.1);
   color: white;
   outline: none;
@@ -308,9 +308,13 @@ header .camp-h{
   opacity: 0;
 }
 
+.file-input {
+  display: none;
+}
+
 .chat-messages .chat-msg {
   overflow-x: hidden;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .chat-msg .full-msg {
@@ -341,9 +345,23 @@ header .camp-h{
   color: white;
 }
 
+.img {
+  margin-top: 30px;
+  display: flex;
+  max-width: 70vw;
+  border: 3px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
 
 
 @media(min-width: 640px){
+  .img {
+   max-width: 30vw;
+   max-height: 100vh;
+  }
+
   .bg-app{
     background-position-y: -65px;
   }
@@ -355,6 +373,7 @@ header .camp-h{
   header .icon-menu {
     width: 38px;
   }
+
 
   .camp-div {
     font-size: 20px;
