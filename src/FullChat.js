@@ -6,7 +6,7 @@ import {Context} from "./App";
 
 const server = 'https://karavi-server.up.railway.app/';
 
-const socket = io.connect('server');
+const socket = io.connect(server);
 
 function FullChat(){
   const [campSet, setCampSet] = useState("");
