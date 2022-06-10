@@ -81,7 +81,7 @@ function FullChat(){
     if(typing){
       const localCamp = localStorage.getItem("camp");
       const localName = localStorage.getItem("name");
-      console.log('typing');
+
       socket.emit("typing", messageData(localName, ' is typing ...', null, localCamp, localName, 'yes'));
     }
   }, [typing]);

@@ -6,8 +6,11 @@ import {Context} from "./App";
 import Menu from "./Menu";
 import Img from "./Img";
 import axios from 'axios';
+import sound from './assets/pop.mp3';
+const audio = new Audio(sound);
 
 function Chat({ socket, name, camp }) {
+
   const [msgList, setMessageList] = useState([]);
   const [msg, setMsg] = useState("");
   const {menu} = useContext(Context);
@@ -16,8 +19,13 @@ function Chat({ socket, name, camp }) {
   const [file, setFile] = useState();
   const {typing, setTyping} = useContext(Context);
   
+  
   async function sendMsg(evt) {
     if (evt.key == "Enter") {
+      if(localStorage.getItem("sound-off") === null){
+        audio.play();
+      }
+      
       evt.preventDefault();
       let dateTime = new Date();
       var minutes = ("0" + dateTime.getMinutes()).substr(-2);
@@ -25,6 +33,28 @@ function Chat({ socket, name, camp }) {
       if(msg === "/img"){
         setMsg("");
         fileInput.current.click();
+      }
+      if(msg === "/soundoff"){
+        
+        setMsg("");
+        localStorage.setItem("sound-off", "yes");
+        const msgData = {
+          user: `Sound is off`,
+          time: dateTime.getHours() + ":" + minutes,
+        };
+
+        setMessageList((list) => [...list, msgData]);
+      }
+      if(msg === "/soundon"){
+        
+        setMsg("");
+        localStorage.removeItem("sound-off");
+        const msgData = {
+          user: `Sound is on`,
+          time: dateTime.getHours() + ":" + minutes,
+        };
+
+        setMessageList((list) => [...list, msgData]);
       }
       if(file) {
         const msgData = {
@@ -38,24 +68,14 @@ function Chat({ socket, name, camp }) {
         };
 
         await socket.emit("send_message", msgData);
-        setTyping(false);
-        socket.emit("typing-over", camp);
+        
         setMessageList((list) => [...list, msgData]);
         setMsg("");
         setFile();
-        // const formData = new FormData();
-        // formData.append('file', file);
-        
-        //   const res = await axios.post('http://localhost:4000/upload/', formData, {
-        //     headers: {
-        //       'Content-Type': 'multipart/form-data'
-        //     }
-        // });
-
 
       }
 
-      if (msg != "" && msg !== "/img" && !file) {
+      if (msg != "" && msg !== "/soundon" && msg !== "/soundoff" && msg !== "/img" && !file) {
 
         const msgData = {
           user: name,
@@ -65,11 +85,13 @@ function Chat({ socket, name, camp }) {
         };
 
         await socket.emit("send_message", msgData);
-        setTyping(false);
-        socket.emit("typing-over", camp);
+        
         setMessageList((list) => [...list, msgData]);
         setMsg("");
       }
+      setTyping(false);
+      const data = {camp: camp, name: name};
+      socket.emit("typing-over", data);
     }
   }
 
@@ -93,24 +115,35 @@ function Chat({ socket, name, camp }) {
     if(value.length == 0){
       setTyping(false);
       const localCamp = localStorage.getItem("camp");
-      socket.emit("typing-over", localCamp);
+      const localName = localStorage.getItem("name");
+      const data = {camp: localCamp, name: localName};
+      socket.emit("typing-over", data);
     }
   }
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
+
+      if(data.typing !== "yes" &&localStorage.getItem("sound-off") === null){
+        audio.play();
+      }
     });
+
     return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("typing"); setTyping(false);
     };
   }, []);
 
   useEffect (()=> {
     socket.on("removeTyping", (data) => {
-      let typingDiv = document.querySelectorAll(".typing-msg");
+      let typingUser = document.querySelectorAll(".typing-author");
+      let user = data.name;
 
-      for(let i=0; i<typingDiv.length; i++) {
-        typingDiv[i].style.display="none";
+      for(let i=0; i<typingUser.length; i++) {
+
+        if(typingUser[i].textContent === user){
+          typingUser[i].parentElement.parentElement.style.display="none";
+          }                
       }
 
     });
@@ -135,7 +168,9 @@ function Chat({ socket, name, camp }) {
               onChange={(e) => {setMsg(e.target.value); showTyping(e.target.value)}}
               onKeyPress={sendMsg}
             ></input>
-            <input onChange={selectFile}ref={fileInput} type="file" className="file-input" accept="image/*"></input>
+          
+              <input onChange={selectFile}ref={fileInput} type="file" className="file-input" accept="image/*"></input>
+            
           </div>
 
           <div className="chat-messages">
@@ -150,7 +185,7 @@ function Chat({ socket, name, camp }) {
                     className={content.typing === 'yes' ? ("typing-msg chat-msg") : ("chat-msg")}
                   >
                     <p className={content.type != null ? "info-msg" : "full-msg"}>
-                      <span id="author">
+                      <span className={content.typing === 'yes' ? ("typing-author") : ("author")} id="author">
                         {content.user}
                       </span>
                       {content.type != null && <span id="connection-info"> {content.info} </span>}
