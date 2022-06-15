@@ -138,32 +138,61 @@ header .camp-h{
   display: flex;
   flex-direction: column;
   overflow: auto;
-  margin-top: 30px;
-  
-  min-height: 25vh;
-  width: 80%
+  margin-top: 32px;
+  width: 80%;
+}
+
+.user-div p{
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2px 15px 2px 15px;
+
+}
+
+.user-div {
+  width: fit-content;
+  margin-top: 5px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.user-h {
+  color: #ccc;
+  letter-spacing: 1px;
+  min-height: 50px;
+
+}
+
+#user-you {
+  font-weight: 550;
+
 }
 
 .userlist p {
-  margin-top: 1vh;
-  font-size: 15px;
+  border-radius: 5px;
+  color: white;
+  margin-top: 15px;
+  
+  font-size: 14px;
 }
 
+
 .menu-options {
-  color: white;
   margin-top: 20px;
 }
 
 .menu-h {
+  display: none;
+  margin-top: 30px;
   font-size: 19px;
   color: #ccc;
 }
 
 .menu-options p {
+  
   color: white;
-  padding: 11px;
-  font-size: 15px;
-  background-color: rgba(0, 0, 0, 0.5);
+  padding: 8px 20px 8px 20px;
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.8);
 
 }
 
@@ -388,7 +417,7 @@ header .camp-h{
   }
 
   .camp-div, .chat-div {
-    margin-top: 27vh;
+    margin-top: 26vh;
     min-width: 50%;
     max-width: 50%;
     overflow: hidden;
@@ -411,7 +440,7 @@ header .camp-h{
   }
 
   .userlist p {
-    font-size: 16px;
+    font-size: 15px; 
   }
 
   .chat-messages {
@@ -475,10 +504,6 @@ header .camp-h{
     color: white;
   }
 
-  .menu-options p{
-    font-size: 14px;
-  }
-
 
   #you {
     text-align: right;
@@ -491,7 +516,7 @@ header .camp-h{
   }
 
   .error-div {
-    font-size: 19px;
+    font-size: 16px;
   }
 
   .camp-div input{
@@ -501,6 +526,8 @@ header .camp-h{
   .chat-msg .info-msg {
     margin-top: 0px;
   }
+ 
+
 }
 
 @media(max-height: 600px){

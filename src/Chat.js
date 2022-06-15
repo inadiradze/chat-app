@@ -8,16 +8,18 @@ import Img from "./Img";
 import axios from 'axios';
 import sound from './assets/pop.mp3';
 const audio = new Audio(sound);
+var moment = require('moment-timezone');
+
 
 function Chat({ socket, name, camp }) {
 
   const [msgList, setMessageList] = useState([]);
   const [msg, setMsg] = useState("");
   const {menu} = useContext(Context);
-  const {joined, setJoined} = useContext(Context);
   const fileInput = useRef();
   const [file, setFile] = useState();
   const {typing, setTyping} = useContext(Context);
+  const {joined, setJoined} = useContext(Context);
   
   
   async function sendMsg(evt) {
@@ -131,12 +133,16 @@ function Chat({ socket, name, camp }) {
     
     });
 
+    socket.on("users", (data) => {
+      setJoined(data);
+    });
+
     socket.on("saved-messages", (data) => {
         setMessageList(data);
         
     });
 
-    return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("typing"); setTyping(false); socket.off("saved-messages"); socket.off("name-taken");
+    return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("typing"); setTyping(false); socket.off("saved-messages"); socket.off("name-taken"); socket.off("users");
     };
   }, []);
 
@@ -156,8 +162,19 @@ function Chat({ socket, name, camp }) {
     return ()=> {socket.off("typing-over")}; 
   }, []);
 
-  let dateTime = new Date();
-  var minutes = ("0" + dateTime.getMinutes()).substr(-2);
+  useEffect ( ()=> {
+    
+      let typing = document.querySelectorAll(".typing-msg");
+
+      for(let i=0; i<typing.length; i++) {
+        typing[i].style.display="none";
+      }
+    
+  }, [menu]);
+
+  let dateTime = moment().tz("Asia/Tbilisi").format("HH:mm");
+
+
 
 
   return (
@@ -186,6 +203,7 @@ function Chat({ socket, name, camp }) {
 
             <ScrollToBottom className="msg-container">
 
+
               {msgList.map((content, index) => {
                 return (
                   <div
@@ -198,7 +216,7 @@ function Chat({ socket, name, camp }) {
                         {content.user}
                       </span>
                       {content.type != null && <span id="connection-info"> {content.info} </span>}
-                      <span id="timeid">{content.time ? (content.time) : !content.typing && (dateTime.getHours() + ":" + minutes)}</span>
+                      <span id="timeid">{content.time ? (content.time) : !content.typing && (dateTime)}</span>
                       <span id="message">{content.img === 'yes' ? (renderImage(content)) : (content.message)}</span>
                     </p>
                   </div>

@@ -4,6 +4,7 @@ import "./style.css";
 import Chat from "./Chat";
 import {Context} from "./App";
 
+
 const server = 'https://karavi-server.up.railway.app/';
 
 const socket = io.connect(server);
@@ -61,7 +62,8 @@ function Home(){
         socket.on("name-taken", ()=> {
           setShowChat(false);
           setError("User already exists in that camp...");
-          localStorage.clear();
+          localStorage.removeItem("camp");
+          localStorage.removeItem("name");
         });
       }
     }
