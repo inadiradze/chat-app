@@ -6,7 +6,7 @@ import {Context} from "./App";
 
 const server = 'https://karavi-server.up.railway.app/';
 
-const socket = io.connect('192.168.0.103:4000');
+const socket = io.connect(server);
 
 function Home(){
   const [campSet, setCampSet] = useState("");
@@ -58,6 +58,11 @@ function Home(){
         socket.emit("join-camp", camp, name, messageData(name, joinText, null, camp));
         setCamp(""); setName("");
         setShowChat(true);
+        socket.on("name-taken", ()=> {
+          setShowChat(false);
+          setError("User already exists in that camp...");
+          localStorage.clear();
+        });
       }
     }
   };

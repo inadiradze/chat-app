@@ -28,7 +28,7 @@ function Chat({ socket, name, camp }) {
 
       if(msg === "/img"){
         setMsg("");
-        fileInput.current.click();
+        
       }
       if(msg === "/soundoff"){
         
@@ -128,16 +128,15 @@ function Chat({ socket, name, camp }) {
       if(data.typing !== "yes" &&localStorage.getItem("sound-off") === null){
         audio.play();
       }
-      console.log(data);
     
     });
 
     socket.on("saved-messages", (data) => {
         setMessageList(data);
-        console.log(data);
+        
     });
 
-    return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("typing"); setTyping(false); socket.off("saved-messages");
+    return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("typing"); setTyping(false); socket.off("saved-messages"); socket.off("name-taken");
     };
   }, []);
 
