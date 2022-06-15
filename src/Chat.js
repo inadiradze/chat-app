@@ -22,13 +22,9 @@ function Chat({ socket, name, camp }) {
   
   async function sendMsg(evt) {
     if (evt.key == "Enter") {
-      if(localStorage.getItem("sound-off") === null){
-        audio.play();
-      }
       
       evt.preventDefault();
-      let dateTime = new Date();
-      var minutes = ("0" + dateTime.getMinutes()).substr(-2);
+      
 
       if(msg === "/img"){
         setMsg("");
@@ -40,7 +36,7 @@ function Chat({ socket, name, camp }) {
         localStorage.setItem("sound-off", "yes");
         const msgData = {
           user: `Sound is off`,
-          time: dateTime.getHours() + ":" + minutes,
+          
         };
 
         setMessageList((list) => [...list, msgData]);
@@ -51,17 +47,20 @@ function Chat({ socket, name, camp }) {
         localStorage.removeItem("sound-off");
         const msgData = {
           user: `Sound is on`,
-          time: dateTime.getHours() + ":" + minutes,
+
         };
 
         setMessageList((list) => [...list, msgData]);
       }
       if(file) {
+        if(localStorage.getItem("sound-off") === null){
+          audio.play();
+        }
         const msgData = {
           user: name,
           message: file,
           camp: camp,
-          time: dateTime.getHours() + ":" + minutes,
+          
           img: "yes",
           type: file.type,
           name: file.name,
@@ -76,12 +75,14 @@ function Chat({ socket, name, camp }) {
       }
 
       if (msg != "" && msg !== "/soundon" && msg !== "/soundoff" && msg !== "/img" && !file) {
+        if(localStorage.getItem("sound-off") === null){
+          audio.play();
+        }
 
         const msgData = {
           user: name,
           message: msg,
           camp: camp,
-          time: dateTime.getHours() + ":" + minutes,
         };
 
         await socket.emit("send_message", msgData);
@@ -124,13 +125,19 @@ function Chat({ socket, name, camp }) {
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
-
       if(data.typing !== "yes" &&localStorage.getItem("sound-off") === null){
         audio.play();
       }
+      console.log(data);
+    
     });
 
-    return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("typing"); setTyping(false);
+    socket.on("saved-messages", (data) => {
+        setMessageList(data);
+        console.log(data);
+    });
+
+    return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("typing"); setTyping(false); socket.off("saved-messages");
     };
   }, []);
 
@@ -150,7 +157,10 @@ function Chat({ socket, name, camp }) {
     return ()=> {socket.off("typing-over")}; 
   }, []);
 
- 
+  let dateTime = new Date();
+  var minutes = ("0" + dateTime.getMinutes()).substr(-2);
+
+
   return (
     <div>
     {!menu ? (
@@ -180,7 +190,7 @@ function Chat({ socket, name, camp }) {
               {msgList.map((content, index) => {
                 return (
                   <div
-                    id={name === content.user ? "you" : "other"}
+                    id={name === content.user ? ("you") : ("other")}
                     key={index}
                     className={content.typing === 'yes' ? ("typing-msg chat-msg") : ("chat-msg")}
                   >
@@ -189,7 +199,7 @@ function Chat({ socket, name, camp }) {
                         {content.user}
                       </span>
                       {content.type != null && <span id="connection-info"> {content.info} </span>}
-                      <span id="timeid">{content.time}</span>
+                      <span id="timeid">{content.time ? (content.time) : !content.typing && (dateTime.getHours() + ":" + minutes)}</span>
                       <span id="message">{content.img === 'yes' ? (renderImage(content)) : (content.message)}</span>
                     </p>
                   </div>

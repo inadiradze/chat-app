@@ -1,9 +1,10 @@
 import React, { useState, createContext } from "react";
-import FullChat from "./FullChat";
 import Chat from "./Chat";
 import Header from "./Header";
 import Home from "./Home";
+
 export const Context = createContext();
+
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
   return (
     <Context.Provider value={{showChat, setShowChat, menu, setMenu, leave, setLeave, joined, setJoined, typing, setTyping}}>
     <div className="bg-app">
-      <div className="app blur">
+      <div className="app">
         <Header />
         <main>
           <Home />
