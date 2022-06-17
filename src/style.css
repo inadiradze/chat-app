@@ -149,18 +149,28 @@ header .camp-h{
 }
 
 .user-div {
+
   width: fit-content;
   margin-top: 5px;
   margin-left: 50%;
   transform: translateX(-50%);
 }
 
-.user-h {
+
+.onlineUsers-h {
   color: #ccc;
   letter-spacing: 1px;
-  min-height: 50px;
-
+  min-height: 42px;
 }
+
+.loader {
+  position: absolute;
+  left: 50%;
+  
+  top: 45%;
+  transform: translate(-50%);
+}
+
 
 #user-you {
   font-weight: 550;
@@ -170,7 +180,7 @@ header .camp-h{
 .userlist p {
   border-radius: 5px;
   color: white;
-  margin-top: 15px;
+
   
   font-size: 14px;
 }
@@ -228,7 +238,8 @@ header .camp-h{
   min-height: 60%;
   width: 90%;
   max-width: 90%;
-  max-height: 60%;  
+  max-height: 60%;
+  border-radius: 15px;  
 }
 
 .camp-name {
@@ -271,7 +282,7 @@ header .camp-h{
   min-height: initial;
   min-width: 90vw;
   max-width: 90vw;
-  border-radius: 0;
+  border-radius: 15px;
   z-index: 99;
 }
 
@@ -410,6 +421,7 @@ header .camp-h{
   header .icon-menu {
     width: 38px;
   }
+
 
 
   .camp-div {

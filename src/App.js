@@ -13,9 +13,10 @@ function App() {
   const [leave, setLeave] =  useState(false);
   const [typing, setTyping] = useState(false);
   const [joined, setJoined] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   return (
-    <Context.Provider value={{showChat, setShowChat, menu, setMenu, leave, setLeave, typing, setTyping, joined, setJoined}}>
+    <Context.Provider value={{showChat, setShowChat, menu, setMenu, leave, setLeave, typing, setTyping, joined, setJoined, onlineUsers, setOnlineUsers}}>
     <div className="bg-app">
       <div className="app">
         <Header />

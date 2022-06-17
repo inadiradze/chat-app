@@ -4,7 +4,6 @@ import "./style.css";
 import Chat from "./Chat";
 import {Context} from "./App";
 
-
 const server = 'https://karavi-server.up.railway.app/';
 
 const socket = io.connect(server);
@@ -18,9 +17,12 @@ function Home(){
   const {leave, setLeave} = useContext(Context);
   const {menu, setMenu} = useContext(Context);
   const {typing, setTyping} = useContext(Context);
+  var moment = require('moment-timezone');
 
 
   function messageData(username, info, message, campname, name, typing) {
+
+    let dateTime = moment().tz("Asia/Tbilisi").format("HH:mm");
   
     const msgData = {
               user: username,
@@ -28,7 +30,7 @@ function Home(){
               message: message,
               camp: campname,
               name: name,
-              
+              time: dateTime,
               type: 'info',
               typing: typing,
         };

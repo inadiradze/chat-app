@@ -1,12 +1,14 @@
 import React, { useEffect, useContext, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./style.css";
+
 import ScrollToBottom from "react-scroll-to-bottom";
 import {Context} from "./App";
 import Menu from "./Menu";
 import Img from "./Img";
 import axios from 'axios';
 import sound from './assets/pop.mp3';
+import { Loader } from '@mantine/core';
 const audio = new Audio(sound);
 var moment = require('moment-timezone');
 
@@ -20,10 +22,13 @@ function Chat({ socket, name, camp }) {
   const [file, setFile] = useState();
   const {typing, setTyping} = useContext(Context);
   const {joined, setJoined} = useContext(Context);
+  const {onlineUsers, setOnlineUsers} = useContext(Context);
+  const [loading, setLoading] = useState(true);
   
   
   async function sendMsg(evt) {
     if (evt.key == "Enter") {
+      let dateTime = moment().tz("Asia/Tbilisi").format("HH:mm");
       
       evt.preventDefault();
       
@@ -38,7 +43,7 @@ function Chat({ socket, name, camp }) {
         localStorage.setItem("sound-off", "yes");
         const msgData = {
           user: `Sound is off`,
-          
+          time: dateTime,
         };
 
         setMessageList((list) => [...list, msgData]);
@@ -49,7 +54,7 @@ function Chat({ socket, name, camp }) {
         localStorage.removeItem("sound-off");
         const msgData = {
           user: `Sound is on`,
-
+          time: dateTime,
         };
 
         setMessageList((list) => [...list, msgData]);
@@ -62,7 +67,7 @@ function Chat({ socket, name, camp }) {
           user: name,
           message: file,
           camp: camp,
-          
+          time: dateTime,
           img: "yes",
           type: file.type,
           name: file.name,
@@ -81,10 +86,13 @@ function Chat({ socket, name, camp }) {
           audio.play();
         }
 
+        let dateTime = moment().tz("Asia/Tbilisi").format("HH:mm");
+
         const msgData = {
           user: name,
           message: msg,
           camp: camp,
+          time: dateTime,
         };
 
         await socket.emit("send_message", msgData);
@@ -137,8 +145,13 @@ function Chat({ socket, name, camp }) {
       setJoined(data);
     });
 
+    socket.on("online-users", (data) => {
+      setOnlineUsers(data);
+    });
+
     socket.on("saved-messages", (data) => {
-        setMessageList(data);
+      setLoading(false);  
+      setMessageList(data);
         
     });
 
@@ -172,7 +185,7 @@ function Chat({ socket, name, camp }) {
     
   }, [menu]);
 
-  let dateTime = moment().tz("Asia/Tbilisi").format("HH:mm");
+  
 
 
 
@@ -182,6 +195,8 @@ function Chat({ socket, name, camp }) {
     {!menu ? (
       <div className="chat-div">
         <div className="chat-window">
+        {loading && <Loader color="white" className="loader"/>}
+
           <p className="camp-name">{camp}</p>
           <div className="empty-div"></div>
        
@@ -198,14 +213,15 @@ function Chat({ socket, name, camp }) {
               <input onChange={selectFile}ref={fileInput} type="file" className="file-input" accept="image/*"></input>
             
           </div>
+          
 
           <div className="chat-messages">
 
             <ScrollToBottom className="msg-container">
 
-
               {msgList.map((content, index) => {
                 return (
+
                   <div
                     id={name === content.user ? ("you") : ("other")}
                     key={index}
@@ -216,7 +232,7 @@ function Chat({ socket, name, camp }) {
                         {content.user}
                       </span>
                       {content.type != null && <span id="connection-info"> {content.info} </span>}
-                      <span id="timeid">{content.time ? (content.time) : !content.typing && (dateTime)}</span>
+                      <span id="timeid">{content.time}</span>
                       <span id="message">{content.img === 'yes' ? (renderImage(content)) : (content.message)}</span>
                     </p>
                   </div>
