@@ -185,11 +185,6 @@ function Chat({ socket, name, camp }) {
     
   }, [menu]);
 
-  
-
-
-
-
   return (
     <div>
     {!menu ? (
@@ -217,7 +212,8 @@ function Chat({ socket, name, camp }) {
 
           <div className="chat-messages">
 
-            <ScrollToBottom className="msg-container">
+            <ScrollToBottom initialScrollBehavior="auto" className="msg-container">
+
 
               {msgList.map((content, index) => {
                 return (
