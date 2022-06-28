@@ -5,6 +5,7 @@ import Menu from './Menu';
 
 function Header() {
 	const {menu, setMenu} = useContext(Context);
+	const {showChat, setShowChat} = useContext(Context);
 
 	return (
 		<div>
@@ -12,7 +13,8 @@ function Header() {
 				<a href="/">
 		    		<p className="camp-h">Karavi</p>
 		    	</a>
-		    	<img onClick={ ()=> {setMenu(!menu)}} className="icon-menu" src="menu.png"></img>
+		    	{showChat && (
+		    	<img onClick={ ()=> {setMenu(!menu)}} className="icon-menu" src="menu.png"></img>)}
 		    	<div className="empty-header"></div>
 	      	</header>
       	</div>

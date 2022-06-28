@@ -24,6 +24,9 @@ function Chat({ socket, name, camp }) {
   const {joined, setJoined} = useContext(Context);
   const {onlineUsers, setOnlineUsers} = useContext(Context);
   const [loading, setLoading] = useState(true);
+  const {theme, setTheme} = useContext(Context);
+  document.title = 'Karavi | Chat';
+  
   
   
   async function sendMsg(evt) {
@@ -33,10 +36,14 @@ function Chat({ socket, name, camp }) {
       evt.preventDefault();
       
 
-      if(msg === "/img"){
+      if(msg === "/img" || msg === "/dark" || msg === "/light" || msg === "/tent"){
         setMsg("");
-        
       }
+
+      if(msg === "/light"){
+        setTheme("light");
+      }
+
       if(msg === "/soundoff"){
         
         setMsg("");
@@ -81,7 +88,7 @@ function Chat({ socket, name, camp }) {
 
       }
 
-      if (msg != "" && msg !== "/soundon" && msg !== "/soundoff" && msg !== "/img" && !file) {
+      if (msg.trim().length != 0 && msg !== "/soundon" && msg !== "/soundoff" && msg !== "/img" && !file && msg !== "/light" && msg !== "/dark" && msg !== "/tent") {
         if(localStorage.getItem("sound-off") === null){
           audio.play();
         }
@@ -132,13 +139,13 @@ function Chat({ socket, name, camp }) {
     }
   }
 
+
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
       if(data.typing !== "yes" &&localStorage.getItem("sound-off") === null){
         audio.play();
       }
-    
     });
 
     socket.on("users", (data) => {
@@ -199,7 +206,7 @@ function Chat({ socket, name, camp }) {
             <input
               type="text"
               className="chat-textinput"
-              placeholder="Say something..."
+              placeholder="Aa"
               value={msg}
               onChange={(e) => {setMsg(e.target.value); showTyping(e.target.value)}}
               onKeyPress={sendMsg}

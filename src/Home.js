@@ -66,6 +66,7 @@ function Home(){
           setError("User already exists in that camp...");
           localStorage.removeItem("camp");
           localStorage.removeItem("name");
+          socket.emit("join-camp", "ERROR3333ERROR", "UNKNOWN");
         });
       }
     }
