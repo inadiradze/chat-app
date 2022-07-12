@@ -223,14 +223,14 @@ function Chat({ socket, name, camp }) {
                 let days = moment().diff(moment(content.createdAt), 'days');
                 let msgTime;
               
-                if(days >= 1){
+                if(days >= 7){
                   let month = content.createdAt;
-                  let msgMonth = moment.monthsShort(parseInt(month.slice(5,7)));
+                  let msgMonth = moment.monthsShort(parseInt(month.slice(5,7) - 1));
                   let msgDay = content.createdAt.slice(8,10);
                   msgTime = <>{content.time}&nbsp; <span className="old-time">{msgMonth} {msgDay}</span></>;
-                }else if(days >= 365){
+                }else if(days >= 365 || days <= 7 && days >= 1){
                   let msgOld = moment(content.createdAt).fromNow(); 
-                  msgTime = <>{content.time}&nbsp;<span className="old-time">{msgOld}</span></>
+                  msgTime = <>{content.time} &nbsp;<span className="old-time">{msgOld}</span></>
                 }else{
                   msgTime = content.time;
                 }
