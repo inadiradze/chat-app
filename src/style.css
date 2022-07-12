@@ -373,6 +373,9 @@ header .camp-h{
   margin-top: 0px;
 }
 
+.old-time {
+  color: #ccc;
+}
 
 .full-msg #message{
   display: flex;

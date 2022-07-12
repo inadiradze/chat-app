@@ -162,11 +162,6 @@ function Chat({ socket, name, camp }) {
         
     });
 
-    return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("typing"); setTyping(false); socket.off("saved-messages"); socket.off("name-taken"); socket.off("users");
-    };
-  }, []);
-
-  useEffect (()=> {
     socket.on("removeTyping", (data) => {
       let typingUser = document.querySelectorAll(".typing-author");
       let user = data.name;
@@ -179,11 +174,12 @@ function Chat({ socket, name, camp }) {
       }
 
     });
-    return ()=> {socket.off("typing-over")}; 
+
+    return () => {socket.off("receive_message"); socket.off("leave-camp"); socket.off("join-oldcamp"); socket.off("typing"); setTyping(false); socket.off("saved-messages"); socket.off("name-taken"); socket.off("users"); socket.off("typing-over")
+    };
   }, []);
 
   useEffect ( ()=> {
-    
       let typing = document.querySelectorAll(".typing-msg");
 
       for(let i=0; i<typing.length; i++) {
@@ -223,19 +219,35 @@ function Chat({ socket, name, camp }) {
 
 
               {msgList.map((content, index) => {
+
+                let days = moment().diff(moment(content.createdAt), 'days');
+                let msgTime;
+              
+                if(days >= 1){
+                  let month = content.createdAt;
+                  let msgMonth = moment.monthsShort(parseInt(month.slice(5,7)));
+                  let msgDay = content.createdAt.slice(8,10);
+                  msgTime = <>{content.time}&nbsp; <span className="old-time">{msgMonth} {msgDay}</span></>;
+                }else if(days >= 365){
+                  let msgOld = moment(content.createdAt).fromNow(); 
+                  msgTime = <>{content.time}&nbsp;<span className="old-time">{msgOld}</span></>
+                }else{
+                  msgTime = content.time;
+                }
+
                 return (
 
                   <div
                     id={name === content.user ? ("you") : ("other")}
                     key={index}
                     className={content.typing === 'yes' ? ("typing-msg chat-msg") : ("chat-msg")}
-                  >
+                  > 
                     <p className={content.type != null ? "info-msg" : "full-msg"}>
                       <span className={content.typing === 'yes' ? ("typing-author") : ("author")} id="author">
                         {content.user}
                       </span>
                       {content.type != null && <span id="connection-info"> {content.info} </span>}
-                      <span id="timeid">{content.time}</span>
+                      <span id="timeid">{msgTime}</span>
                       <span id="message">{content.img === 'yes' ? (renderImage(content)) : (content.message)}</span>
                     </p>
                   </div>
