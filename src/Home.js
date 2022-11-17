@@ -4,7 +4,7 @@ import "./style.css";
 import Chat from "./Chat";
 import {Context} from "./App";
 
-const server = 'https://karavi-server.up.railway.app/';
+const server = 'https://al-karav-production.up.railway.up';
 
 const socket = io.connect(server);
 
